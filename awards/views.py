@@ -86,3 +86,46 @@ def profile(request):
         }
 
     return render(request, 'registration/profile.html', params)
+
+
+
+@login_required(login_url='/accounts/login')
+def new_project(request):
+	current_user = request.user
+	if request.method == 'POST':
+		form = ProjectForm(request.POST,request.FILES)
+		if form.is_valid():
+			new_project = form.save(commit=False)
+			new_project.user = current_user
+			new_project.save()
+			return redirect('index')
+	else:
+			form = ProjectForm()
+	return render(request, 'project.html',{"form":form})
+
+@login_required(login_url='/accounts/login/')
+def review_project(request,project_id):
+    proj = Project.project_by_id(id=project_id)
+    project = get_object_or_404(Project, pk=project_id)
+    current_user = request.user
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            design = form.cleaned_data['design']
+            usability = form.cleaned_data['usability']
+            content = form.cleaned_data['content']
+            review = Review()
+            review.project = project
+            review.user = current_user
+            review.design = design
+            review.usability = usability
+            review.content = content
+            review.average = (review.design + review.usability + review.content)/3
+            review.save()
+          
+            return HttpResponseRedirect(reverse('projectdetails', args=(project.id,)))
+    else:
+        form = ReviewForm()
+    return render(request, 'reviews.html', {"user":current_user,"project":proj,"form":form})
+
+
