@@ -129,3 +129,36 @@ def review_project(request,project_id):
     return render(request, 'reviews.html', {"user":current_user,"project":proj,"form":form})
 
 
+@login_required(login_url='/accounts/login')
+def project_details(request,id):
+    project = Project.objects.get(id = id)
+    reviews = Review.objects.order_by('-timestamp')
+
+    context={"project":project,"reviews":reviews}
+    return render(request, 'project_details.html',context)
+
+class ProfileList(APIView):
+    """
+    List all snippets, or create a new snippet.
+    """
+
+    def get(self, request, format=None):
+        profiles = Profile.objects.all()
+        serializer = ProfileSerializer(profiles, many=True)
+        return Response(serializer.data)
+
+class ProjectList(APIView):
+    """
+    List all snippets, or create a new snippet.
+    """
+
+    def get(self, request, format=None):
+        projects = Project.objects.all()
+        serializer = ProjectSerializer(projects, many=True)
+        return Response(serializer.data)
+
+    
+
+    
+
+
