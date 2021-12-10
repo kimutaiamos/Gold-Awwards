@@ -38,4 +38,45 @@ class Project(models.Model):
     profile = models.ForeignKey(Profile,null=True,on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.title
+
+    def save_project(self):
+        self.save()
+
+    def delete_project(self):
+        self.delete()
+
+    @classmethod
+    def project_by_id(cls,id):
+        project = Project.objects.filter(id =id)
+        return project
+
+    @classmethod
+    def search_by_title(cls,search_term):
+        projects = cls.objects.filter(title__icontains=search_term)
+        return projects
+        
+class Review(models.Model):
+    REVIEW_CHOICES = (
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+        (6, '6'),
+        (7, '7'),
+        (8, '8'),
+        (9, '9'),
+        (10, '10'),
+    )
+    design = models.IntegerField(choices=REVIEW_CHOICES,default=0,blank=False)
+    usability = models.IntegerField(choices=REVIEW_CHOICES,default=0,blank=False)
+    content = models.IntegerField(choices=REVIEW_CHOICES,default=0,blank=False)
+    average =  models.DecimalField(default=1,blank=False,decimal_places=2,max_digits=40)
+    project = models.ForeignKey(Project,null=True,on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User,null=True,blank=True,on_delete=models.CASCADE)
+
+
 
