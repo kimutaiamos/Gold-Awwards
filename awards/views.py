@@ -18,7 +18,7 @@ from django.urls import reverse
 
 
 def index(request):
- profiles = Profile.objects.all()
+    profiles = Profile.objects.all()
     projects = Project.objects.all()
     reviews = Review.objects.all()
 
