@@ -59,3 +59,30 @@ def search_projects(request):
         message = "You haven't searched for any term"
         return render(request, 'search.html',{"message":message})
 
+
+
+@login_required(login_url='/accounts/login/')    
+def profile(request):
+    if request.method == 'POST':
+
+        userForm = UserUpdateForm(request.POST, instance=request.user)
+        profile_form = ProfileForm(
+            request.POST, request.FILES, instance=request.user)
+
+        if  profile_form.is_valid():
+            profile_form.save()
+
+            return redirect('home')
+
+    else:
+        
+        profile_form = ProfileForm(instance=request.user)
+        user_form = UserUpdateForm(instance=request.user)
+
+        params = {
+            'user_form':user_form,
+            'profile_form': profile_form
+
+        }
+
+    return render(request, 'registration/profile.html', params)
