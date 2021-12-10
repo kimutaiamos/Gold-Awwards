@@ -1,0 +1,55 @@
+{%extends 'base.html'%}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+
+
+<div class="container"  id="background">
+
+<h1 style="text-align:center; color: black">DIAMONDAWWWARDS.</h1>
+
+</div>
+
+<div class="projects" style="margin-top:10px;">
+  
+
+  <div class="container">
+    <div class="row">
+      {% for project in projects %}
+      <div class="col-sm-12 col-md-6 col-lg-4">
+
+        <div class="panel panel-default" style=" background-color:rgba(7, 6, 6, 0.979);
+        color:white;
+        border:none;
+        font-style: italic;">
+          <div class="panel-body">
+            <a href="{% url 'projectdetails' id=project.id %}">
+              <div class="img-cont">
+                <img class="card-img-top mb-10 img-responsive i-images" src="{{project.image.url}}"
+                  style="height:260px;width:100%;">
+                <div class="overlay">
+                  <div class="text" style="color:  #f04f01;">{{project.title}}</div>
+                  <div class="details"><a href="{% url 'projectdetails' id=project.id %}" class="btn btn-primary"
+                      style="background-color:  #f04f01;">Rate && View in site</a>
+                  </div>
+                </div>
+              </div>
+            </a>
+            <br>
+            <p style="font-size:16px; color: #f04f01;">Posted by: {{project.user | upper}} <span
+                style="float:right;font-size:16px; color: #f04f01;">{{project.timestamp | date:"D, d-m-Y"}}</span></p>
+          </div>
+          <div class="card-body">
+            <div class="card-text">
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
