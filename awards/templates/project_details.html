@@ -1,0 +1,141 @@
+{%extends 'base.html'%}
+
+{% block content %}
+
+
+<div class="container">
+  <div class="row" style="margin-top:50px;text-align: center;">
+    <div class="col-md-1"></div>
+    <div class="col-sm-12 col-md-5 col-lg-4">
+
+      <div class="card" style="height:100%;width:100%;margin-bottom:10px; margin-left:250px;">
+        <div class="card-body">
+          <a href="{% url 'projectdetails' id=project.id %}">
+
+            <img class="card-img-top mb-10" src="{{project.image.url}}" style="height:300px;">
+          </a>
+          <a href="{% url 'review' project_id=project.id%}" class="btn btn-info btn-block"
+            style="background-color: #f04f01;">Rate</a>
+          <a href="{{project.link}}" class="btn btn-success btn-block" target="_blank"
+            style="background-color:  #f04f01;;">Visit Site</a>
+          <p style="color:black;"> <b>Title :</b> {{project.title}} </p>
+          <b style="color:black;">Description : </b<p style="color: black;">{{ project.description  }}</p>
+            <p style="color: black;"> <b> Posted:</b> {{project.timestamp | timesince }} ago</p>
+
+
+        </div>
+        <div class="card-body">
+          <div class="card-text">
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-md-2">
+    </div>
+  </div>
+
+  <br>
+  <div class="row">
+
+
+    {% if reviews %}
+    <div class="col-md-1"></div>
+    <div class="col-md-2">
+      <p class="text-center" style="margin-left: 80px;">DESIGN</p>
+      <div class="main-container">
+        <div class="motion-container">
+          <div class="motion-item circle one"></div>
+          <div class="motion-item circle two"></div>
+          <h style="color:white;">{{project.avg_design |floatformat}}</h>
+          <div class="motion-item circle five"></div>
+          <div class="motion-item circle seven"></div>
+
+        </div>
+
+      </div>
+    </div>
+    <div class="col-md-2">
+      <p class="text-center" style="margin-left: 80px;">USABILITY</p>
+      <div class="main-container">
+        <div class="motion-container">
+          <div class="motion-item circle one"></div>
+          <div class="motion-item circle two"></div>
+          <div class="motion-item circle four"></div>
+          <h style="color:white;">{{project.avg_usability |floatformat}}</h>
+          <div class="motion-item circle six"></div>
+          <div class="motion-item circle seven"></div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <p class="text-center"style="margin-left: 80px;">CONTENT</p>
+      <div class="main-container">
+        <div class="motion-container">
+          <div class="motion-item circle one"></div>
+          <div class="motion-item circle two"></div>
+          <h style="color:white;"> {{project.avg_content |floatformat}}</h>
+          <div class="motion-item circle seven"></div>
+        </div>
+      </div>
+      {%else%}
+      <h3 style="padding-left:400px;">This project has no ratings</h3>
+      {%endif%}
+    </div>
+    <div class="col-md-2">
+      <p class="text-center" style="margin-left: 80px;">SCORE</p>
+      <div class="main-container">
+        <div class="motion-container">
+          <div class="motion-item circle one"></div>
+          <div class="motion-item circle two"></div>
+          <h style="color:white;"> {{project.avg_content |floatformat}}</h>
+          <div class="motion-item circle seven"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+
+  <div class="container">
+
+
+    {% for review in reviews %}
+    <div class="row">
+      {% if project.id == review.project.id %}
+      <div class="col-md-2" style="margin-left: 0px; font-size: italic;">
+        Rated by : {{review.user.username}}</div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-dark btn-lg">{{review.design}}</button>
+      </div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-dark btn-lg">
+          {{review.usability}}
+
+        </button>
+      </div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-dark btn-lg">{{review.content}}</button>
+      </div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-dark btn-lg">{{review.average}}</button>
+      </div>
+
+
+      {%endif%}
+
+    </div>
+    <hr>
+    <br>
+    {% endfor  %}
+
+    </p>
+  </div>
+
+</div>
+
+{% endblock %}
