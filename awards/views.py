@@ -12,6 +12,8 @@ from django.urls import reverse
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
+from .models import Profile, Project, Review
+
 # Create your views here.
 
 
@@ -43,7 +45,7 @@ def registration(request):
 
 
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/accounts/login')
 def search_projects(request):
     if 'title' in request.GET and request.GET["title"]:
 
@@ -61,7 +63,7 @@ def search_projects(request):
 
 
 
-@login_required(login_url='/accounts/login/')    
+@login_required(login_url='/accounts/login')    
 def profile(request):
     if request.method == 'POST':
 

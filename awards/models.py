@@ -6,28 +6,29 @@ from django.db.models.signals import post_save
 
 # Create your models here.
 class Profile(models.Model):
-    #   profile_picture = CloudinaryField('image')
+    # profile_photo = models.ImageField(upload_to = 'profilepics/', default='Image')
+
     bio = models.TextField(max_length=600, default="bio", blank=True)
     contact = models.CharField(max_length=60, blank=True)
-    timestamp = models.DateTimeField(timezone.now())
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile", primary_key=True)
-    @receiver(post_save, sender=User)
-    def create_user_profile(sender, instance, created, **kwargs):
-            if created:
-                Profile.objects.create(user=instance)
-
-    @receiver(post_save, sender=User)
-    def save_user_profile(sender, instance, **kwargs):
-            instance.profile.save()
-
-    def __str__(self):
-         return self.user.username
+    user = models.OneToOneField(User,on_delete=models.CASCADE, primary_key=True)
 
     def save_profile(self):
-            self.save()
+        self.save()
+    
+    @classmethod
+    def search_profile(cls, name):
+        profile = Profile.objects.filter(user__username__icontains = name)
+        return profile
+    
+    @classmethod
+    def get_by_id(cls, id):
+        profile = Profile.objects.get(user = id)
+        return profile
 
-    def delete_profile(self):
-            self.delete()  
+    @classmethod
+    def filter_by_id(cls, id):
+        profile = Profile.objects.filter(user = id).first()
+        return profile
 
 class Project(models.Model):
     title = models.CharField(max_length=60, blank=True)
