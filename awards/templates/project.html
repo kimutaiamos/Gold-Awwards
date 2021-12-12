@@ -9,7 +9,8 @@
   <title>Upload</title>
   {{form.media}}
 
-  {% block styles %} {% bootstrap_css %}
+  {% block styles %} 
+  {% bootstrap_css %}
   <link rel="stylesheet" href="{% static 'css/awards.css' %}"> {% endblock %}
 
 </head>
@@ -30,7 +31,7 @@
           {%csrf_token%}
 
           {% bootstrap_form form %}
-          <input type="submit" class="btn btn-info btn-block" value="Add Project" style="background-color: #f04f01">
+          <input type="submit" class="btn btn-danger btn-block" value="Add Project" style="background-color: #f04f01">
         </form>
       </div>
       <div class="col-md-3"></div>

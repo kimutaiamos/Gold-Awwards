@@ -10,10 +10,11 @@
   <title class="text-center">New Image</title>
   {{form.media}}
 
-  {% block styles %} {% bootstrap_css %}
+  {% block styles %} 
+  {% bootstrap_css %}
   <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}"> {% endblock %}
+  <link rel="stylesheet" href="{% static 'css/award.css' %}"> {% endblock %}
 
 </head>
 
@@ -34,7 +35,7 @@
           {%csrf_token%}
 
           {% bootstrap_form form %}
-          <input type="submit" class="btn btn-info btn-block" value="Review" style="background-color: #f04f01 ;">
+          <input type="submit" class="btn btn-danger btn-block" value="Review" style="background-color: #f04f01 ;">
         </form>
       </div>
       <div class="col-md-3"></div>

@@ -7,7 +7,7 @@ from django.db.models.signals import post_save
 # Create your models here.
 class Profile(models.Model):
     #   profile_picture = CloudinaryField('image')
-    bio = models.TextField(max_length=600, default="My Bio", blank=True)
+    bio = models.TextField(max_length=600, default="bio", blank=True)
     contact = models.CharField(max_length=60, blank=True)
     timestamp = models.DateTimeField(timezone.now())
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile", primary_key=True)
