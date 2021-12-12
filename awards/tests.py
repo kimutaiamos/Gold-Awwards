@@ -10,9 +10,9 @@ class ProfileTestClass(TestCase):
         '''
         test case for profiles
         '''
-        self.user = User(username='Kiprotich')
+        self.user = User(username='Kimutai')
         self.user.save()
-        self.profile = Profile( profile_picture='black and orange',bio='programmer',contact="0701111780",user=self.user)
+        self.profile = Profile( profile_picture='black and orange',bio='programmer',contact="0743880558",user=self.user)
         self.profile.save_profile()
 
     def tearDown(self):
