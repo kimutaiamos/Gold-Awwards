@@ -12,7 +12,7 @@
         <div class="card-body">
           <a href="{% url 'projectdetails' id=project.id %}">
 
-            <img class="card-img-top mb-10" src="{{project.image.url}}" style="height:300px;">
+            <img class="card-img-top mb-10" src="{{project.project_photo.url}}" style="height:300px;">
           </a>
           <a href="{% url 'review' project_id=project.id%}" class="btn btn-info btn-block"
             style="background-color: #f04f01;">Rate</a>
@@ -138,4 +138,170 @@
 
 </div>
 
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+
+<div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <div class="progress blue">
+                    <span class="progress-left">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <span class="progress-right">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <div class="progress-value">90%</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="progress yellow">
+                    <span class="progress-left">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <span class="progress-right">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <div class="progress-value">75%</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="progress pink">
+                    <span class="progress-left">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <span class="progress-right">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <div class="progress-value">60%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        body{
+            background-color: #333;
+            margin: 10%;
+            margin-left: 30%;
+        
+        }
+        .progress{
+            background: none;
+            margin: 0 auto;
+            box-shadow: none;
+            width: 150px;
+            height: 150px;
+            line-height: 150px;
+            position: relative;
+        }
+        .progress:after{
+            content: "";
+            border-radius: 50%;
+            border: 15px solid #f2f5f5;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+        .progress > span{
+            position: absolute;
+            top: 0;
+            z-index: 1;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .progress .progress-left{
+            left: 0;
+        }
+        .progress .progress-bar{
+            border-width: 15px;
+            border-style: solid;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: none;
+            top: 0;
+        }
+        .progress .progress-left .progress-bar{
+            left: 100%;
+            border-top-right-radius: 80px;
+            border-bottom-right-radius: 80px;
+            border-left: 0;
+            -webkit-transform-origin: center left;
+            transform-origin: center left;
+        }
+        .progress .progress-right{
+            right: 0;
+        }
+        .progress .progress-right .progress-bar{
+            left: -100%;
+            -webkit-transform-origin: center right;
+            transform-origin: center right;
+            border-top-left-radius: 80px;
+            border-bottom-left-radius: 80px;
+            border-right: 0;
+            animation: loading-1 1.8s linear forwards;
+        }
+        .progress .progress-value{
+            font-size: 24px;
+            color: green;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+        @keyframes loading-1{
+            0%{
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            100%{
+                -webkit-transform: rotate(180deg);
+                transform: rotate(180deg);
+            }
+        }
+        @keyframes loading-2{
+            0%{
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            100%{
+                -webkit-transform: rotate(144deg);
+                transform: rotate(144deg);
+            }
+        }
+        @keyframes loading-3{
+            0%{
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            100%{
+                -webkit-transform: rotate(90deg);
+                transform: rotate(90deg);
+            }
+        }
+        @keyframes loading-4{
+            0%{
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            100%{
+                -webkit-transform: rotate(36deg);
+                transform: rotate(36deg);
+            }
+        }
+        @keyframes loading-5{
+            0%{
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            100%{
+                -webkit-transform: rotate(126deg);
+                transform: rotate(126deg);
+            }
+        }
+    </style>
 {% endblock %}
