@@ -11,6 +11,7 @@ django-registration==2.4
 django-tinymce==3.4.0
 django-utils-six==2.0
 djangorestframework==3.12.4
+gunicorn==20.1.0
 Pillow==8.4.0
 psycopg2==2.9.2
 python-decouple==3.5
