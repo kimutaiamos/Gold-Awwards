@@ -12,14 +12,9 @@ from django.urls import reverse
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
-from .models import Profile, Project, Review
-
 # Create your views here.
-
-
-
-
 def index(request):
+
     profiles = Profile.objects.all()
     projects = Project.objects.all()
     reviews = Review.objects.all()
@@ -31,28 +26,27 @@ def index(request):
 
 def registration(request):
     if request.method=="POST":
-        form=SignUpForm(request.POST)
+        form=SignUpForm(request.POST) 
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            user_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=user_password)
-            login(request, user)
-            return redirect('login')
-        else:
-            form= SignUpForm()
-            return render(request, 'registration/registration_form.html', {"form":form})
+           form.save()
+           username = form.cleaned_data.get('username')
+           user_password = form.cleaned_data.get('password1')
+           user = authenticate(username=username, password=user_password)
+           login(request, user)
+        return redirect('login')
+    else:
+        form= SignUpForm()
+    return render(request, 'registration/registration_form.html', {"form":form}) 
 
-
-
-@login_required(login_url='/accounts/login')
+@login_required(login_url='/accounts/login/')
 def search_projects(request):
     if 'title' in request.GET and request.GET["title"]:
 
         search_term = request.GET.get("title")
-        found_projects =  Project.search_by_title(search_term)
+        found_projects = Project.search_by_title(search_term)
         message = f"{search_term}"
         print(search_term)
+
         context = {"found_projects":found_projects,"message":message}
 
         return render(request, 'search.html',context)
@@ -62,8 +56,7 @@ def search_projects(request):
         return render(request, 'search.html',{"message":message})
 
 
-
-@login_required(login_url='/accounts/login')    
+@login_required(login_url='/accounts/login/')    
 def profile(request):
     if request.method == 'POST':
 
@@ -90,7 +83,6 @@ def profile(request):
     return render(request, 'registration/profile.html', params)
 
 
-
 @login_required(login_url='/accounts/login')
 def new_project(request):
 	current_user = request.user
@@ -104,6 +96,7 @@ def new_project(request):
 	else:
 			form = ProjectForm()
 	return render(request, 'project.html',{"form":form})
+
 
 @login_required(login_url='/accounts/login/')
 def review_project(request,project_id):
@@ -149,6 +142,9 @@ class ProfileList(APIView):
         serializer = ProfileSerializer(profiles, many=True)
         return Response(serializer.data)
 
+    
+
+
 class ProjectList(APIView):
     """
     List all snippets, or create a new snippet.
@@ -158,9 +154,3 @@ class ProjectList(APIView):
         projects = Project.objects.all()
         serializer = ProjectSerializer(projects, many=True)
         return Response(serializer.data)
-
-    
-
-    
-
-
