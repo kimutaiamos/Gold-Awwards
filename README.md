@@ -72,6 +72,4 @@ View [live](https://siramoswards.herokuapp.com/)
 
 This software is LIcensed under MIT license copyright 2019 [sirAmos]
 
-`
-
 
